@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101411">
+  <meta name="description" content="Prywatny kajecik finansowy – Mój Portfel">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Mój Portfel</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-page="home"><span class="brand-mark">₿</span><span>Mój <b>Portfel</b></span></a>
+      <div class="side-label">MENU</div>
+      <nav class="nav">
+        <button class="nav-link active" data-page="home"><span>⌂</span> Pulpit</button>
+        <button class="nav-link" data-page="transactions"><span>↕</span> Operacje</button>
+        <button class="nav-link" data-page="savings"><span>◎</span> Oszczędności</button>
+        <button class="nav-link" data-page="budget"><span>▤</span> Budżet</button>
+        <button class="nav-link" data-page="stats"><span>▥</span> Statystyki</button>
+        <button class="nav-link" data-page="settings"><span>⚙</span> Ustawienia</button>
+      </nav>
+      <div class="sidebar-note"><span class="live-dot"></span> Dane zapisują się na tym urządzeniu</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow" id="today-label">TWÓJ FINANSOWY KAJECIK</div><h1 id="page-title">Pulpit</h1></div>
+        <button class="avatar" title="Prywatny portfel">MP</button>
+      </header>
+
+      <section class="page active" id="page-home">
+        <div class="hero-card">
+          <div class="hero-top"><span>AKTUALNY BILANS</span><span class="pill"><i></i> Mój portfel</span></div>
+          <div class="balance" id="balance">0,00 zł</div>
+          <div class="hero-bottom"><span id="balance-caption">Suma zapisanych przychodów i wydatków</span><button class="hero-add" data-open-modal>＋ Dodaj wpis</button></div>
+        </div>
+        <div class="summary-grid">
+          <article class="summary-card"><div class="summary-icon income">↙</div><div><small>PRZYCHODY W TYM MIESIĄCU</small><strong class="positive" id="month-income">0,00 zł</strong></div></article>
+          <article class="summary-card"><div class="summary-icon expense">↗</div><div><small>WYDATKI W TYM MIESIĄCU</small><strong class="negative" id="month-expense">0,00 zł</strong></div></article>
+          <article class="summary-card"><div class="summary-icon saved">◎</div><div><small>ODŁOŻONE OSZCZĘDNOŚCI</small><strong id="saved-total">0,00 zł</strong></div></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel">
+            <div class="panel-head"><div><h2>Ostatnie operacje</h2><p>Twoja najnowsza aktywność</p></div><button class="text-button" data-goto="transactions">Zobacz wszystkie →</button></div>
+            <div id="recent-list" class="transaction-list"><div class="empty">Nie masz jeszcze żadnych wpisów.<br>Dodaj pierwszy przyciskiem powyżej.</div></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><h2>Podsumowanie</h2><p>Przychody i wydatki w tym miesiącu</p></div></div>
+            <div class="mini-chart" id="home-chart"><div class="empty">Dodaj operacje, aby zobaczyć podsumowanie.</div></div>
+            <div class="legend"><span><i class="legend-income"></i> Przychody</span><span><i class="legend-expense"></i> Wydatki</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="page-transactions">
+        <div class="section-toolbar"><div><h2>Historia operacji</h2><p>Wszystkie zapisane wpływy i wydatki</p></div><button class="primary-btn" data-open-modal>＋ Dodaj wpis</button></div>
+        <div class="panel">
+          <div class="filters"><input id="search-transactions" type="search" placeholder="Szukaj po nazwie lub kategorii…"><select id="filter-type"><option value="all">Wszystkie typy</option><option value="income">Przychody</option><option value="expense">Wydatki</option><option value="saving">Oszczędności</option></select></div>
+          <div id="all-list" class="transaction-list"><div class="empty">Brak zapisanych operacji.</div></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-savings">
+        <div class="section-toolbar"><div><h2>Twoje cele</h2><p>Odkładaj na to, co dla Ciebie ważne</p></div><button class="primary-btn" id="add-goal">＋ Nowy cel</button></div>
+        <div id="goals-list" class="goals-grid"></div>
+      </section>
+
+      <section class="page" id="page-budget">
+        <div class="section-toolbar"><div><h2>Miesięczny budżet</h2><p>Kontroluj, ile możesz wydać</p></div><button class="primary-btn" id="edit-budget">Ustaw limit</button></div>
+        <div class="panel budget-panel" id="budget-content"></div>
+      </section>
+
+      <section class="page" id="page-stats">
+        <div class="section-toolbar"><div><h2>Statystyki</h2><p>Sprawdź, dokąd trafiają Twoje pieniądze</p></div><select id="stats-period"><option value="month">Ten miesiąc</option><option value="all">Cała historia</option></select></div>
+        <div class="summary-grid">
+          <article class="summary-card"><div><small>PRZYCHODY</small><strong class="positive" id="stats-income">0,00 zł</strong></div></article>
+          <article class="summary-card"><div><small>WYDATKI</small><strong class="negative" id="stats-expense">0,00 zł</strong></div></article>
+          <article class="summary-card"><div><small>RÓŻNICA</small><strong id="stats-diff">0,00 zł</strong></div></article>
+        </div>
+        <article class="panel"><div class="panel-head"><div><h2>Wydatki według kategorii</h2><p>Największe obszary Twoich wydatków</p></div></div><div id="category-stats"><div class="empty">Brak danych do wyświetlenia.</div></div></article>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="section-toolbar"><div><h2>Ustawienia</h2><p>Zarządzaj swoimi danymi</p></div></div>
+        <div class="settings-grid">
+          <article class="panel"><h2>Kopia zapasowa</h2><p>Eksportuj dane do pliku JSON lub przywróć wcześniej zapisany plik.</p><div class="button-row"><button class="primary-btn" id="export-data">Pobierz kopię danych</button><label class="secondary-btn file-label">Importuj kopię<input type="file" id="import-data" accept="application/json"></label></div></article>
+          <article class="panel"><h2>Informacje</h2><p><b>Mój Portfel</b> – prywatny, lokalny kajecik finansowy.</p><p class="muted">Dane są przechowywane w pamięci przeglądarki na tym urządzeniu. Nie są automatycznie synchronizowane z innymi urządzeniami.</p></article>
+          <article class="panel danger-zone"><h2>Reset danych</h2><p>Usuwa wszystkie operacje, cele i ustawienia zapisane w tej przeglądarce. Tej czynności nie można cofnąć.</p><button class="danger-btn" id="reset-data">Usuń wszystkie dane</button></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav">
+    <button class="active" data-page="home"><span>⌂</span><small>Pulpit</small></button>
+    <button data-page="transactions"><span>↕</span><small>Operacje</small></button>
+    <button data-page="savings"><span>◎</span><small>Cele</small></button>
+    <button data-page="stats"><span>▥</span><small>Statystyki</small></button>
+    <button data-page="settings"><span>⚙</span><small>Więcej</small></button>
+  </nav>
+
+  <div class="modal-backdrop" id="transaction-modal" aria-hidden="true">
+    <form class="modal" id="transaction-form">
+      <div class="modal-head"><div><div class="eyebrow">NOWA OPERACJA</div><h2>Dodaj wpis</h2></div><button type="button" class="close-modal" data-close-modal>×</button></div>
+      <div class="type-switch"><button type="button" class="selected" data-type="expense">Wydatek</button><button type="button" data-type="income">Przychód</button><button type="button" data-type="saving">Oszczędności</button></div>
+      <label>Kwota (zł)<input id="entry-amount" type="number" min="0.01" step="0.01" placeholder="0,00" required></label>
+      <label>Kategoria<select id="entry-category" required></select></label>
+      <label>Opis<input id="entry-description" type="text" maxlength="80" placeholder="Np. tankowanie, wypłata…" required></label>
+      <label>Data<input id="entry-date" type="date" required></label>
+      <button class="primary-btn full-btn" type="submit">Zapisz operację</button>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+  <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./service-worker.js').catch(()=>{});</script>
+</body>
+</html>
